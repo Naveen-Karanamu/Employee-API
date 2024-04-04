@@ -1,49 +1,82 @@
 package rest.EmployeeApi.models;
 
-import java.util.Objects;
-
 public class Address {
-    private String localAddress;
-    private String officeAddress;
+    private LocalAddress localAddress;
+    private OfficeAddress officeAddress;
 
-    // Getters and Setters
-    public String getLocalAddress() {
+    public LocalAddress getLocalAddress() {
         return localAddress;
     }
 
-    public void setLocalAddress(String localAddress) {
+    public void setLocalAddress(LocalAddress localAddress) {
         this.localAddress = localAddress;
     }
 
-    public String getOfficeAddress() {
+    public OfficeAddress getOfficeAddress() {
         return officeAddress;
     }
 
-    public void setOfficeAddress(String officeAddress) {
+    public void setOfficeAddress(OfficeAddress officeAddress) {
         this.officeAddress = officeAddress;
     }
 
-    // equals() and hashCode() methods
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return Objects.equals(localAddress, address.localAddress) &&
-                Objects.equals(officeAddress, address.officeAddress);
+    public static class LocalAddress {
+        private String street;
+        private String city;
+        private String zipCode;
+
+        public String getStreet() {
+            return street;
+        }
+
+        public void setStreet(String street) {
+            this.street = street;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getZipCode() {
+            return zipCode;
+        }
+
+        public void setZipCode(String zipCode) {
+            this.zipCode = zipCode;
+        }
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(localAddress, officeAddress);
-    }
+    public static class OfficeAddress {
+        private String street;
+        private String city;
+        private String zipCode;
 
-    // toString() method
-    @Override
-    public String toString() {
-        return "Address{" +
-                "localAddress='" + localAddress + '\'' +
-                ", officeAddress='" + officeAddress + '\'' +
-                '}';
+        public String getStreet() {
+            return street;
+        }
+
+        public void setStreet(String street) {
+            this.street = street;
+        }
+
+        public String getCity() {
+            return city;
+        }
+
+        public void setCity(String city) {
+            this.city = city;
+        }
+
+        public String getZipCode() {
+            return zipCode;
+        }
+
+        public void setZipCode(String zipCode) {
+            this.zipCode = zipCode;
+        }
     }
 }

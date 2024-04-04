@@ -10,6 +10,7 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import rest.EmployeeApi.Exceptions.ErrorResponse;
@@ -102,4 +103,32 @@ public class EmployeeController {
                            .build();
         }
     }
+    
+    @GET
+    @Path("/search")
+    public List<Employee> searchEmployees(
+            @QueryParam("name") String name,
+            @QueryParam("department.department1.id") Integer department1Id,
+            @QueryParam("department.department1.name") String department1Name,
+            @QueryParam("department.department2.id") Integer department2Id,
+            @QueryParam("department.department2.name") String department2Name,
+            @QueryParam("dob") String dob,
+            @QueryParam("localAddress.street") String localStreet,
+            @QueryParam("localAddress.city") String localCity,
+            @QueryParam("localAddress.zipCode") String localZipCode,
+            @QueryParam("officeAddress.street") String officeStreet,
+            @QueryParam("officeAddress.city") String officeCity,
+            @QueryParam("officeAddress.zipCode") String officeZipCode,
+            @QueryParam("salary") Double salary,
+            @QueryParam("spouse") String spouse,
+            @QueryParam("kid") String kid,
+            @QueryParam("parent") String parent,
+            @QueryParam("parentInLaw") String parentInLaw,
+            @QueryParam("otherDependent") String otherDependent) {
+        return employeeService.searchEmployees(name, department1Id, department1Name, department2Id, department2Name,
+                                                dob, localStreet, localCity, localZipCode,
+                                                officeStreet, officeCity, officeZipCode,
+                                                salary, spouse, kid, parent, parentInLaw, otherDependent);
+    }
+
 }

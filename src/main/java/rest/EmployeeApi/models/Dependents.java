@@ -8,7 +8,8 @@ public class Dependents {
     private String[] parentsInLaw;
     private String[] others;
 
-    // Getters and Setters
+    // Getters, Setters, equals(), hashCode(), and toString() methods
+
     public String[] getParents() {
         return parents;
     }
@@ -33,7 +34,6 @@ public class Dependents {
         this.others = others;
     }
 
-    // equals() and hashCode() methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -52,7 +52,6 @@ public class Dependents {
         return result;
     }
 
-    // toString() method
     @Override
     public String toString() {
         return "Dependents{" +

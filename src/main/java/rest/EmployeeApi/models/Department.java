@@ -3,47 +3,73 @@ package rest.EmployeeApi.models;
 import java.util.Objects;
 
 public class Department {
-    private String department1;
-    private String department2;
+    private DepartmentInfo department1;
+    private DepartmentInfo department2;
 
-    // Getters and Setters
-    public String getDepartment1() {
+    public DepartmentInfo getDepartment1() {
         return department1;
     }
 
-    public void setDepartment1(String department1) {
+    public void setDepartment1(DepartmentInfo department1) {
         this.department1 = department1;
     }
 
-    public String getDepartment2() {
+    public DepartmentInfo getDepartment2() {
         return department2;
     }
 
-    public void setDepartment2(String department2) {
+    public void setDepartment2(DepartmentInfo department2) {
         this.department2 = department2;
     }
 
-    // equals() and hashCode() methods
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Department that = (Department) o;
-        return Objects.equals(department1, that.department1) &&
-                Objects.equals(department2, that.department2);
-    }
+    public static class DepartmentInfo {
+        private int id;
+        private String name;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(department1, department2);
-    }
+        public DepartmentInfo() {
+        }
 
-    // toString() method
-    @Override
-    public String toString() {
-        return "Department{" +
-                "department1='" + department1 + '\'' +
-                ", department2='" + department2 + '\'' +
-                '}';
+        public DepartmentInfo(int id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            DepartmentInfo that = (DepartmentInfo) o;
+            return id == that.id &&
+                    Objects.equals(name, that.name);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id, name);
+        }
+
+        @Override
+        public String toString() {
+            return "DepartmentInfo{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
 }

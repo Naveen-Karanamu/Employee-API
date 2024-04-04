@@ -8,7 +8,8 @@ public class Family {
     private String[] kids;
     private Dependents dependents;
 
-    // Getters and Setters
+    // Getters, Setters, equals(), hashCode(), and toString() methods
+
     public String getSpouse() {
         return spouse;
     }
@@ -33,7 +34,6 @@ public class Family {
         this.dependents = dependents;
     }
 
-    // equals() and hashCode() methods
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,7 +51,6 @@ public class Family {
         return result;
     }
 
-    // toString() method
     @Override
     public String toString() {
         return "Family{" +

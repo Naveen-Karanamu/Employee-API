@@ -9,7 +9,7 @@ import rest.EmployeeApi.models.Employee;
 import rest.EmployeeApi.services.EmployeeService;
 
 public class EmployeeServiceImpl implements EmployeeService {
-    private Map<Integer, Employee> employees = DataBaseClass.getMessages();
+    private Map<Integer, Employee> employees = DataBaseClass.getEmployees();
     
     
     @Override

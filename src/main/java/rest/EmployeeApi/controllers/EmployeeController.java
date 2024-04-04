@@ -22,11 +22,16 @@ public class EmployeeController {
     private EmployeeServiceImpl employeeService = new EmployeeServiceImpl();
 
     @GET
+    public String test() {
+    	return "hello";
+    }
+    
+    @GET
     @Path("/all")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
-
+    
     @GET
     @Path("/{id}")
     public Employee getEmployeeById(@PathParam("id") int id) {

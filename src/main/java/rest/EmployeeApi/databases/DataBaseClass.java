@@ -14,7 +14,6 @@ public class DataBaseClass {
 	private static Map<Integer, Employee> employees= new HashMap<>();
 	
 	static {
-        // Adding some sample data
         Employee employee1 = new Employee("John Doe", 1, "1990-01-01", new Address(), new Department(), 50000.0, new Family());
         Employee employee2 = new Employee("Jane Smith", 2, "1995-05-15", new Address(), new Department(), 60000.0, new Family());
         employees.put(1, employee1);

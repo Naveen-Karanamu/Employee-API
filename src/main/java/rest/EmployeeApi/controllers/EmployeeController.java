@@ -12,6 +12,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import rest.EmployeeApi.Exceptions.ErrorResponse;
 import rest.EmployeeApi.models.Employee;
 import rest.EmployeeApi.service.impl.EmployeeServiceImpl;
 
@@ -23,49 +24,82 @@ public class EmployeeController {
 
     @GET
     public String test() {
-    	return "hello";
+        return "hello";
     }
-    
+
     @GET
     @Path("/all")
     public List<Employee> getAllEmployees() {
         return employeeService.getAllEmployees();
     }
-    
+
     @GET
     @Path("/{id}")
-    public Employee getEmployeeById(@PathParam("id") int id) {
-        return employeeService.getEmployeeById(id);
+    public Response getEmployeeById(@PathParam("id") int id) {
+        Employee employee = employeeService.getEmployeeById(id);
+        if (employee != null) {
+            return Response.ok().entity(employee).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity(new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), 
+                                                     "Employee not found with id: " + id))
+                           .build();
+        }
     }
 
     @POST
     @Path("/add")
     public Response addEmployee(Employee employee) {
-        Employee addedEmployee = employeeService.addEmployee(employee);
-        return Response.status(Response.Status.CREATED).entity(addedEmployee).build();
+        try {
+            Employee addedEmployee = employeeService.addEmployee(employee);
+            return Response.status(Response.Status.CREATED).entity(addedEmployee).build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                           .entity(new ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 
+                                                     "Error adding employee: " + e.getMessage()))
+                           .build();
+        }
     }
 
     @PUT
     @Path("/update/{id}")
     public Response updateEmployee(@PathParam("id") int id, Employee employee) {
-        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
-        if(updatedEmployee != null) {
-            return Response.ok().entity(updatedEmployee).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build(); 
+        try {
+            Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+            if (updatedEmployee != null) {
+                return Response.ok().entity(updatedEmployee).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                               .entity(new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), 
+                                                         "Employee not found with id: " + id))
+                               .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                           .entity(new ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 
+                                                     "Error updating employee: " + e.getMessage()))
+                           .build();
         }
     }
-
 
     @DELETE
     @Path("/delete/{id}")
     public Response deleteEmployee(@PathParam("id") int id) {
-        Employee deletedEmployee = employeeService.deleteEmployee(id);
-        if (deletedEmployee != null) {
-            return Response.ok().entity(deletedEmployee).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+        try {
+            Employee deletedEmployee = employeeService.deleteEmployee(id);
+            if (deletedEmployee != null) {
+                return Response.ok().entity(deletedEmployee).build();
+            } else {
+                return Response.status(Response.Status.NOT_FOUND)
+                               .entity(new ErrorResponse(Response.Status.NOT_FOUND.getStatusCode(), 
+                                                         "Employee not found with id: " + id))
+                               .build();
+            }
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                           .entity(new ErrorResponse(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode(), 
+                                                     "Error deleting employee: " + e.getMessage()))
+                           .build();
         }
     }
-
 }

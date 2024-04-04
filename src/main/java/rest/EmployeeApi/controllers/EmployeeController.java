@@ -41,21 +41,31 @@ public class EmployeeController {
     @POST
     @Path("/add")
     public Response addEmployee(Employee employee) {
-        employeeService.addEmployee(employee);
-        return Response.status(Response.Status.CREATED).build();
+        Employee addedEmployee = employeeService.addEmployee(employee);
+        return Response.status(Response.Status.CREATED).entity(addedEmployee).build();
     }
 
     @PUT
     @Path("/update/{id}")
     public Response updateEmployee(@PathParam("id") int id, Employee employee) {
-        employeeService.updateEmployee(id, employee);
-        return Response.ok().build();
+        Employee updatedEmployee = employeeService.updateEmployee(id, employee);
+        if(updatedEmployee != null) {
+            return Response.ok().entity(updatedEmployee).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build(); 
+        }
     }
+
 
     @DELETE
     @Path("/delete/{id}")
     public Response deleteEmployee(@PathParam("id") int id) {
-        employeeService.deleteEmployee(id);
-        return Response.noContent().build();
+        Employee deletedEmployee = employeeService.deleteEmployee(id);
+        if (deletedEmployee != null) {
+            return Response.ok().entity(deletedEmployee).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
     }
+
 }

@@ -1,3 +1,4 @@
+// EmployeeServiceImpl.java
 package rest.EmployeeApi.service.impl;
 
 import java.util.ArrayList;
@@ -11,7 +12,6 @@ import rest.EmployeeApi.services.EmployeeService;
 public class EmployeeServiceImpl implements EmployeeService {
     private Map<Integer, Employee> employees = DataBaseClass.getEmployees();
     
-    
     @Override
     public List<Employee> getAllEmployees() {
         return new ArrayList<>(employees.values());
@@ -23,20 +23,27 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
+    public Employee addEmployee(Employee employee) {
         employee.setId(employees.size() + 1); 
         employees.put(employee.getId(), employee);
+        return employee; // Return the added employee
     }
 
     @Override
-    public void updateEmployee(int id, Employee employee) {
+    public Employee updateEmployee(int id, Employee employee) {
         if (employees.containsKey(id)) {
             employees.put(id, employee);
+            return employee; // Return the updated employee
         }
+        return null; // Or handle the case when employee is not found
     }
 
     @Override
-    public void deleteEmployee(int id) {
-        employees.remove(id);
+    public Employee deleteEmployee(int id) {
+        if (employees.containsKey(id)) {
+            Employee deletedEmployee = employees.remove(id);
+            return deletedEmployee;
+        }
+        return null;
     }
 }

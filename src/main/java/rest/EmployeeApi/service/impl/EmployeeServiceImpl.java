@@ -7,8 +7,6 @@ import java.util.Map;
 
 import rest.EmployeeApi.databases.DataBaseClass;
 import rest.EmployeeApi.models.Address;
-import rest.EmployeeApi.models.Address.LocalAddress;
-import rest.EmployeeApi.models.Address.OfficeAddress;
 import rest.EmployeeApi.models.Department;
 import rest.EmployeeApi.models.Employee;
 import rest.EmployeeApi.services.EmployeeService;

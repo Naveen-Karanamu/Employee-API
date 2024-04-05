@@ -88,3 +88,58 @@ The following search filters are supported:
 **For example, you can search for employees who are in department 1 with ID 10 and have a salary greater than 50000: `/employee/search?department.department1.id=10&salary=50000`**
 
 **Replace `{name}`, `{departmentId}`, `{departmentName}`, `{dateOfBirth}`, `{streetAddress}`, `{city}`, `{zipCode}`, `{salary}`, `{spouseName}`, `{kidName}`, `{parentName}`, `{parentInLawName}`, and `{otherDependentName}` with your desired search criteria. 
+
+## Sample Employee JSON object
+```
+[
+    {
+        "address": {
+            "localAddress": {
+                "city": "Springfield",
+                "street": "123 Main St",
+                "zipCode": "12345"
+            },
+            "officeAddress": {
+                "city": "Springfield",
+                "street": "456 Office Ave",
+                "zipCode": "54321"
+            }
+        },
+        "department": {
+            "department1": {
+                "id": 1,
+                "name": "IT"
+            },
+            "department2": {
+                "id": 2,
+                "name": "HR"
+            }
+        },
+        "dob": "1990-01-01",
+        "family": {
+            "dependents": {
+                "others": [
+                    "Other dependent 1",
+                    "Other dependent 2"
+                ],
+                "parents": [
+                    "Parent 1",
+                    "Parent 2"
+                ],
+                "parentsInLaw": [
+                    "Parent in law 1",
+                    "Parent in law 2"
+                ]
+            },
+            "kids": [
+                "Alice",
+                "Bob"
+            ],
+            "spouse": "Jane Doe"
+        },
+        "id": 1,
+        "name": "John Doe",
+        "salary": 60000.0
+    }
+]
+```-
